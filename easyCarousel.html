@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>carousel</title>
+        <link rel="stylesheet" href="style/carousel.css" />
+    </head>
+    <body>
+        <h1>a simple carousel</h1>
+        <div id="carousel" class="carousel">
+            <div class="pic">
+                <ul>
+                    <li><a href="#"><img src="images/1.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/2.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/3.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/4.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/5.jpg" alt=""></a></li>
+                </ul>
+                <div class="pagination">
+                    <a href="#" class="prev">prev</a>
+                    <a href="#" class="next">next</a>
+                </div>
+                <div class="play">
+                    <!-- 此处需要动态插入一段数字代码 -->
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+        <script type="text/javascript" src="js/easyCarousel.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                new EasyCarousel({
+                    containner:$('#carousel'),
+                    interval:3000,
+                    showDruation:800,
+                    hideDuration:300
+
+                });
+            });
+        </script>
+    </body>
+</html>
