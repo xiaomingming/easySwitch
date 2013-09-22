@@ -116,7 +116,9 @@ EasyCarousel.prototype = {
     },
     stopPlay: function() {
         var _this = this;
-        clearInterval(_this.timer);
-        return this.timer = null;
+        if(this.timer!==null){
+            clearInterval(_this.timer);
+            return this.timer = null;
+        }
     }
 };

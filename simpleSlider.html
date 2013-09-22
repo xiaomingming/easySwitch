@@ -8,11 +8,12 @@
 body { font: 12px/1.5 arail; }
 ul { list-style: none; }
 .slide-screen { width: 696px; height: 205px; margin: 0 auto; position: relative; overflow: hidden; border: 1px solid red; }
+.slide-screen .loading { position: absolute; left: 0; top: 0; text-align: center; }
 .slide-list { position: relative; overflow: hidden; }
 .slide-item { float: left; }
 .slide-item a { display: block; }
 .slide-number { position: absolute; bottom: 0; left: 10px; list-style: none; }
-.slide-number li { float: left; margin-right: 10px; line-height: 24px; font-size: 12px; }
+.slide-number li { position: relative; float: left; margin-right: 10px; line-height: 24px; font-size: 12px; }
 .slide-number li a { display: inline-block; background: #333; color: #fff; padding: 0 8px; text-decoration: none; }
 .slide-number li a:hover,.slide-number li.current a { background: orange; text-decoration: none; }
 </style>
@@ -32,6 +33,7 @@ ul { list-style: none; }
         <li><a href="#">2</a></li>
         <li><a href="#">3</a></li>
     </ol> -->
+    <!-- <span class="loading">正在努力加载中...</span> -->
 </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js "></script> 
 <script type="text/javascript" src="js/simpleSlider.js"></script>
