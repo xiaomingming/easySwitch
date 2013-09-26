@@ -1,6 +1,7 @@
 /*
  * @name EasyCarousel
  * @class 一个简单的图片轮播插件，支持渐隐渐现效果，还需要支持左右滑动，上下显示效果，自动适应图片大小
+ * @class 还应当支持在某种情形下停止轮播的控制
  * @param {}
  * @author: leweiming
  * @gmail: xmlovecss@gmail.com
