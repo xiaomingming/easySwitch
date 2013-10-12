@@ -1,3 +1,10 @@
+/*
+* author: leweiming
+* gmail: xmlovecss#gmail.com
+* 模仿一个类似豆瓣读书 http://read.douban.com/ebooks/?dcs=book-intro&dcm=douban 的轮播
+* 但是这个轮播存在一个问题，虽然是一个方向的轮播，但是在自由跳转时，会有距离感
+* 有一个轮播插件在算法上相当简单，轮播切换时只产生一个单位轮播距离，参考：http://slidesjs.com/
+*/
 var SimpleSlide=function(options){
     this.container=options.container;
     this.slideList=this.container.find('.slide-list');
@@ -63,7 +70,7 @@ SimpleSlide.prototype={
     },
     initialLoading:function(){
         var self=this;
-        this.container.append('<span class="loading">正在努力加载中...</span>');
+        this.slideList.find('li').append('<span class="loading">正在努力加载中...</span>');
         this.container.find('.loading').css({
             'width':self.imgWidth+'px',
             'height':self.imgHeight+'px'
@@ -104,20 +111,17 @@ SimpleSlide.prototype={
     },
     // 完成判断
     imgComplete:function(img,callback){
-        if(img.get(0).complete){
-            callback.call(this);
-        }else{
-            img.load(function(){
-                callback.call(this);
-                img.load=null;
-            });
-        }
+        var self=this;
+        img.load(function(){
+            // 载入图片完毕，回调函数
+            console.log('image loaded,excute callback');
+            callback.call(self);
+        });
     },
     // 图像加载完成回调
     imgCompleteCallback:function(){
-        //console.log(this);
+        console.log(SimpleSlide.container);
         this.container.find('.loading').hide();
-        // $('.loading').hide();
     },
     // 播放
     slide:function(index){
@@ -142,6 +146,7 @@ SimpleSlide.prototype={
     autoSlide:function(){
         var self=this;
         this.timer=setInterval(function(){
+            self.slideList.stop(true,true);
             self.slide(self.slideIndex);
         },self.interVal);
     }

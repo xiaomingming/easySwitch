@@ -7,10 +7,11 @@
 * { margin: 0; padding: 0; }
 body { font: 12px/1.5 arail; }
 ul { list-style: none; }
+a img { border: 0; }
 .slide-screen { width: 696px; height: 205px; margin: 0 auto; position: relative; overflow: hidden; border: 1px solid red; }
-.slide-screen .loading { position: absolute; left: 0; top: 0; text-align: center; }
+.slide-screen .loading { position: absolute; left: 0; top: 0; text-align: center; background: #fff; opacity: .7; filter:alpha(opacity=70); z-index: 2; }
 .slide-list { position: relative; overflow: hidden; }
-.slide-item { float: left; }
+.slide-item { position: relative; float: left; }
 .slide-item a { display: block; }
 .slide-number { position: absolute; bottom: 0; left: 10px; list-style: none; }
 .slide-number li { position: relative; float: left; margin-right: 10px; line-height: 24px; font-size: 12px; }
