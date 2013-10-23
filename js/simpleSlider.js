@@ -96,10 +96,11 @@ SimpleSlide.prototype={
         }
     },
     getSlideIndex:function(){
-        this.slideIndex++;
-        if(this.slideIndex===(this.imgLength+2)){
+        /*this.slideIndex++;
+        if(this.slideIndex===(this.imgLength+2)){ //为什么要加 2
             this.slideIndex=1;
-        }
+        }*/
+        this.slideIndex=(this.slideIndex+1)%(this.imgLength+2);//我也只能跟着+2了
     },
     // 预加载图片
     imgPreload:function(imgItems){
