@@ -11,7 +11,7 @@
         .switch-list { position: relative; overflow: hidden; margin: 0; padding: 0; }
         .switch-list * { margin: 0; padding: 0; }
         /*注意此处的z-index设置*/
-        .switch-list li { display: none; position: absolute; left: 0; top: 0;  z-index: 0;  text-align: center;  font-size: 16px; background: #333; color: #fff;  }
+        .switch-list .switch-item { display: none; position: absolute; left: 0; top: 0;  z-index: 0;  text-align: center;  font-size: 16px; background: #333; color: #fff;  }
         .switch-list a img { border: 0; }
         .switch-list li.prev { display: block; z-index: 1; }
         .switch-list li.current { display: block; z-index: 2; }
@@ -25,11 +25,11 @@
     </head>
     <body>
         <ul class="switch-list">
-            <li><a href="#" title="1"><img src="images/1.jpg" alt=""></a></li>
-            <li><a href="#" title="2"><img src="images/2.jpg" alt=""></a></li>
-            <li><a href="#" title="3"><img src="images/3.jpg" alt=""></a></li>
-            <li><a href="#" title="4"><img src="images/4.jpg" alt=""></a></li>
-            <li><a href="#" title="5"><img src="images/5.jpg" alt=""></a></li> 
+            <li class="switch-item"><a href="#" title="1"><img src="images/1.jpg" alt=""></a></li>
+            <li class="switch-item"><a href="#" title="2"><img src="images/2.jpg" alt=""></a></li>
+            <li class="switch-item"><a href="#" title="3"><img src="images/3.jpg" alt=""></a></li>
+            <li class="switch-item"><a href="#" title="4"><img src="images/4.jpg" alt=""></a></li>
+            <li class="switch-item"><a href="#" title="5"><img src="images/5.jpg" alt=""></a></li> 
         </ul>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script type="text/javascript" src="js/easySwitch.js"></script>

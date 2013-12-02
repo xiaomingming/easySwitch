@@ -44,10 +44,15 @@
         // 显示才能获取宽高
         imgEle.parents('li').addClass('prev');
 
+        // 优先获取图像宽高
+        // 如果不是图像，则可以获取包含框的高度
+        // 这样适合非图片的轮播
+        // 也适合switch-item内部嵌套其他层，从而对switch-item进行轮播
         this.width = imgEle.width() || this.container.width();
         this.height = imgEle.height() || this.container.height();
         // 类名获取
         this.switchWrapperName = settings.switchWrapperName;
+        this.switchItemName=settings.switchItemName;
         this.switchNumberName = settings.switchNumberName;
         this.prevBtnName = settings.prevBtnName;
         this.nextBtnName = settings.nextBtnName;
@@ -349,6 +354,7 @@
     };
     $.fn[pluginName].defaults = {
         'switchWrapperName': 'switch-wrapper',
+        'switchItemName':'switch-item',
         'switchNumberName': 'switch-number',
         'prevBtnName': 'switch-prev',
         'nextBtnName': 'switch-next',
