@@ -50,7 +50,6 @@ EasySwitch
     .switch-prev { left: 0;  }
     .switch-next { right: 0; }
 ###js调用：
-    javascript
     $(window).load(function(){
         $('.switch-list').easySwitch({
             'switchWrapperName': 'switch-wrapper', // 轮播的最外包含框类名定义
