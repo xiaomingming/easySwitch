@@ -26,7 +26,8 @@
 *　});
 */
 
-;(function(window, $, undefined) {
+;
+(function(window, $, undefined) {
     var my = {},
         constructorFunName = 'Eswitch',
         pluginName = 'easySwitch';
@@ -39,25 +40,26 @@
         this.timer = null;
         // 获取设置的初始滚动下标
         this.startIndex = settings.startIndex;
+        // 类名获取
+        this.switchWrapperName = settings.switchWrapperName;
+        this.switchItemName = settings.switchItemName;
+        this.switchNumberName = settings.switchNumberName;
+        this.prevBtnName = settings.prevBtnName;
+        this.nextBtnName = settings.nextBtnName;
         // 获取图片宽高
-        imgEle = container.find('li img').eq(this.startIndex);
+        imgEle = container.find('.' + this.switchItemName + ' img').eq(this.startIndex);
         // 显示才能获取宽高
-        imgEle.parents('li').addClass('prev');
+        imgEle.parents('.' + this.switchItemName).addClass('prev');
 
         // 优先获取图像宽高
         // 如果不是图像，则可以获取包含框的高度
         // 这样适合非图片的轮播
         // 也适合switch-item内部嵌套其他层，从而对switch-item进行轮播
-        this.width = imgEle.width() || this.container.width();
-        this.height = imgEle.height() || this.container.height();
-        // 类名获取
-        this.switchWrapperName = settings.switchWrapperName;
-        this.switchItemName=settings.switchItemName;
-        this.switchNumberName = settings.switchNumberName;
-        this.prevBtnName = settings.prevBtnName;
-        this.nextBtnName = settings.nextBtnName;
+        this.width = this.container.width() || imgEle.width();
+        this.height = this.container.height() || imgEle.height();
+
         // 获取图片个数
-        this.itemsLen = this.container.find('li').length;
+        this.itemsLen = this.container.find('.' + this.switchItemName).length;
         // 全局timer，动画状态判断
         this.timer = null;
         this.isAnimating = false;
@@ -133,7 +135,7 @@
         createSwitchWrapper: function() {
             if (!this.isSwitchWrapperCreated) {
                 this.isSwitchWrapperCreated = true;
-                return '<div class="'+this.switchWrapperName+'" style="width:' + this.width + 'px;height:' + this.height + 'px"></div>';
+                return '<div class="' + this.switchWrapperName + '" style="width:' + this.width + 'px;height:' + this.height + 'px"></div>';
             } else {
                 return false;
             }
@@ -142,7 +144,7 @@
         createPlayNumber: function() {
             var i = 0,
                 j = this.itemsLen,
-                tmp = '<div class="'+this.switchNumberName+'">';
+                tmp = '<div class="' + this.switchNumberName + '">';
             for (; i < j; i++) {
                 if (i === this.startIndex) {
                     tmp += '<a href="#" class="current">' + (i + 1) + '</a>';
@@ -169,7 +171,7 @@
         playNumberEvent: function() {
             var self = this;
 
-            this.container.parent().find('.'+this.switchNumberName).on('click', 'a', function(e) {
+            this.container.parent().find('.' + this.switchNumberName).on('click', 'a', function(e) {
                 e.preventDefault();
                 self.gotoIndex($(this).index(), self.startIndex, '');
             });
@@ -177,7 +179,7 @@
         // play number
         playNumber: function(index) {
             var self = this;
-            this.container.parent().find('.'+this.switchNumberName).find('a').eq(index).addClass('current').siblings().removeClass('current');
+            this.container.parent().find('.' + this.switchNumberName).find('a').eq(index).addClass('current').siblings().removeClass('current');
         },
         gotoIndex: function(index, prevIndex, directionFlag) {
             // 停止轮播
@@ -192,7 +194,7 @@
 
         // create next,prev button
         createDirectionBtn: function() {
-            return '<a href="#" class="'+this.prevBtnName+'">上一张</a><a href="#" class="'+this.nextBtnName+'">下一张</a>';
+            return '<a href="#" class="' + this.prevBtnName + '">上一张</a><a href="#" class="' + this.nextBtnName + '">下一张</a>';
         },
         // render next,prev button
         renderDirectionBtn: function() {
@@ -211,7 +213,7 @@
             var self = this,
                 clickIndex;
 
-            this.container.parent().find('.'+this.prevBtnName).on('click', function(e) {
+            this.container.parent().find('.' + this.prevBtnName).on('click', function(e) {
                 e.preventDefault();
                 clickIndex = self.getPrev(self.startIndex);
                 self.gotoIndex(clickIndex, self.startIndex, -1);
@@ -221,7 +223,7 @@
         nextBtnEvent: function() {
             var self = this,
                 clickIndex;
-            this.container.parent().find('.'+this.nextBtnName).on('click', function(e) {
+            this.container.parent().find('.' + this.nextBtnName).on('click', function(e) {
                 e.preventDefault();
                 clickIndex = self.getNext(self.startIndex);
                 self.gotoIndex(clickIndex, self.startIndex, 1);
@@ -277,12 +279,12 @@
             var self = this,
                 moveDistance = 0,
                 container = this.container,
-                currentEle = container.find('li').eq(index),
-                prevEle = container.find('li').eq(prevIndex),
+                currentEle = container.find('.' + this.switchItemName).eq(index),
+                prevEle = container.find('.' + this.switchItemName).eq(prevIndex),
                 promiseCurrent,
                 promisePrev;
             // 先移除current next类
-            container.find('li').removeClass('current prev');
+            container.find('.' + this.switchItemName).removeClass('current prev');
 
             // 移动效果
             if (this.effect === 'moveEffect') {
@@ -354,7 +356,7 @@
     };
     $.fn[pluginName].defaults = {
         'switchWrapperName': 'switch-wrapper',
-        'switchItemName':'switch-item',
+        'switchItemName': 'switch-item',
         'switchNumberName': 'switch-number',
         'prevBtnName': 'switch-prev',
         'nextBtnName': 'switch-next',
