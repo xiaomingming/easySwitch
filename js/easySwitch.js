@@ -237,7 +237,6 @@
                 // 正向跳转
                 return 1;
             } else if (res < 0) {
-                // alert('-1');
                 // 负向跳转
                 return -1;
             } else {
