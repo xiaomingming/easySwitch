@@ -1,6 +1,4 @@
 #EasySwitch
-==========
-
 #基于jquery的简单的图片轮播插件
 
 ##实现效果
@@ -22,55 +20,55 @@
 ##使用方法：
 ###html结构：
 ```html
-    <ul class="switch-list">
-        <li class="switch-item"><a href="#" title="1"><img src="images/1.jpg" alt=""></a></li>
-        <li class="switch-item"><a href="#" title="2"><img src="images/2.jpg" alt=""></a></li>
-        <li class="switch-item"><a href="#" title="3"><img src="images/3.jpg" alt=""></a></li>
-        <li class="switch-item"><a href="#" title="4"><img src="images/4.jpg" alt=""></a></li>
-        <li class="switch-item"><a href="#" title="5"><img src="images/5.jpg" alt=""></a></li> 
-    </ul>
+<ul class="switch-list">
+    <li class="switch-item"><a href="#" title="1"><img src="images/1.jpg" alt=""></a></li>
+    <li class="switch-item"><a href="#" title="2"><img src="images/2.jpg" alt=""></a></li>
+    <li class="switch-item"><a href="#" title="3"><img src="images/3.jpg" alt=""></a></li>
+    <li class="switch-item"><a href="#" title="4"><img src="images/4.jpg" alt=""></a></li>
+    <li class="switch-item"><a href="#" title="5"><img src="images/5.jpg" alt=""></a></li> 
+</ul>
 ```
 结构不能改变，但是类名可以通过js自行定义，更改了类名，也得更改css哦，这是常识。
 
 另外，非图片轮播，只需呀将li.switch-item的内容进行变动即可。
 ###css:
 ```css
-    /*样式请自行美化处理*/
-    /*对于类名，若有冲突，自行更改css和js，配置js类名后，再更改css类名即可*/
-    .switch-wrapper { position: relative; border: 2px solid orange; font-size: 12px; }
-    .switch-wrapper * { margin: 0; padding: 0; }
-    .switch-list { position: relative; overflow: hidden; margin: 0; padding: 0; }
-    .switch-list * { margin: 0; padding: 0; }
-    /*注意此处的z-index设置*/
-    .switch-list .switch-item { display: none; position: absolute; left: 0; top: 0;  z-index: 0;  text-align: center;  font-size: 16px; background: #333; color: #fff;  }
-    .switch-list a img { border: 0; }
-    .switch-list li.prev { display: block; z-index: 1; }
-    .switch-list li.current { display: block; z-index: 2; }
-    .switch-number { position: absolute; right: 10px; bottom: 20px; z-index: 12; }
-    .switch-number a { float: left; margin-right: 10px; padding: 0 6px; line-height: 22px; border: 1px solid orange; background: #333; color: #fff; text-decoration: none; }
-    .switch-number a.current { background: #fff; color: #333; }
-    .switch-prev,.switch-next { position: absolute; width: 40px; height: 22px; text-align: center; line-height: 22px; border: 1px solid orange; background: #333; color: #fff;  top:50%; margin-top: -11px; z-index: 3; text-decoration: none; }
-    .switch-prev { left: 0;  }
-    .switch-next { right: 0; }
+/*样式请自行美化处理*/
+/*对于类名，若有冲突，自行更改css和js，配置js类名后，再更改css类名即可*/
+.switch-wrapper { position: relative; border: 2px solid orange; font-size: 12px; }
+.switch-wrapper * { margin: 0; padding: 0; }
+.switch-list { position: relative; overflow: hidden; margin: 0; padding: 0; }
+.switch-list * { margin: 0; padding: 0; }
+/*注意此处的z-index设置*/
+.switch-list .switch-item { display: none; position: absolute; left: 0; top: 0;  z-index: 0;  text-align: center;  font-size: 16px; background: #333; color: #fff;  }
+.switch-list a img { border: 0; }
+.switch-list li.prev { display: block; z-index: 1; }
+.switch-list li.current { display: block; z-index: 2; }
+.switch-number { position: absolute; right: 10px; bottom: 20px; z-index: 12; }
+.switch-number a { float: left; margin-right: 10px; padding: 0 6px; line-height: 22px; border: 1px solid orange; background: #333; color: #fff; text-decoration: none; }
+.switch-number a.current { background: #fff; color: #333; }
+.switch-prev,.switch-next { position: absolute; width: 40px; height: 22px; text-align: center; line-height: 22px; border: 1px solid orange; background: #333; color: #fff;  top:50%; margin-top: -11px; z-index: 3; text-decoration: none; }
+.switch-prev { left: 0;  }
+.switch-next { right: 0; }
 ```
 ###js调用：
 ```javascript
-    $(window).load(function(){
-        $('.switch-list').easySwitch({
-            'switchWrapperName': 'switch-wrapper', // 轮播的最外包含框类名定义
-            'switchNumberName': 'switch-number', // 轮播数字包含框类名定义
-            'prevBtnName': 'switch-prev', // 轮播上一个按钮类名
-            'nextBtnName': 'switch-next', // 下一个按钮类名定义
-            'effect': 'fadeEffect', // fadeEffect or moveEffect，渐变还是移动效果
-            'moveDirection': 'left', //left or top ，水平移动还是垂直移动（不包含渐变）
-            'isHoverPause': true, // 是否支持在图片上悬浮停止轮播
-            'isPlayNumber': true, // 是否显示轮播数字
-            'isDirbtn': true, // 是否显示轮播的 上一个 下一个按钮
-            'startIndex': 0, // 轮播从第几张图片开始
-            'intervalTime': 3000, // 图片轮播间隔时间
-            'effectDuration': 800 // 动画效果持续时间
-        });
+$(window).load(function(){
+    $('.switch-list').easySwitch({
+        'switchWrapperName': 'switch-wrapper', // 轮播的最外包含框类名定义
+        'switchNumberName': 'switch-number', // 轮播数字包含框类名定义
+        'prevBtnName': 'switch-prev', // 轮播上一个按钮类名
+        'nextBtnName': 'switch-next', // 下一个按钮类名定义
+        'effect': 'fadeEffect', // fadeEffect or moveEffect，渐变还是移动效果
+        'moveDirection': 'left', //left or top ，水平移动还是垂直移动（不包含渐变）
+        'isHoverPause': true, // 是否支持在图片上悬浮停止轮播
+        'isPlayNumber': true, // 是否显示轮播数字
+        'isDirbtn': true, // 是否显示轮播的 上一个 下一个按钮
+        'startIndex': 0, // 轮播从第几张图片开始
+        'intervalTime': 3000, // 图片轮播间隔时间
+        'effectDuration': 800 // 动画效果持续时间
     });
+});
 ```
 若知道了图片大小，则可以直接使用jquery domReady初始化。
 ##浏览器兼容性
