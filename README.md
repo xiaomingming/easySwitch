@@ -59,6 +59,8 @@ $(window).load(function(){
         'switchNumberName': 'switch-number', // 轮播数字包含框类名定义
         'prevBtnName': 'switch-prev', // 轮播上一个按钮类名
         'nextBtnName': 'switch-next', // 下一个按钮类名定义
+        'containerWidth':600,//自定义宽高，可以在domReady时进行调用，不必等待图片载入完毕
+        'containerHeight':375,
         'effect': 'fadeEffect', // fadeEffect or moveEffect，渐变还是移动效果
         'moveDirection': 'left', //left or top ，水平移动还是垂直移动（不包含渐变）
         'isHoverPause': true, // 是否支持在图片上悬浮停止轮播
