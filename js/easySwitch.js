@@ -46,17 +46,22 @@
         this.switchNumberName = settings.switchNumberName;
         this.prevBtnName = settings.prevBtnName;
         this.nextBtnName = settings.nextBtnName;
+        // 自定义宽高获取
+        this.containerHeight = settings.containerHeight;
+        this.containerWidth = settings.containerWidth;
         // 获取图片宽高
         imgEle = container.find('.' + this.switchItemName + ' img').eq(this.startIndex);
         // 显示才能获取宽高
         imgEle.parents('.' + this.switchItemName).addClass('prev');
 
-        // 优先获取图像宽高
         // 如果不是图像，则可以获取包含框的高度
         // 这样适合非图片的轮播
         // 也适合switch-item内部嵌套其他层，从而对switch-item进行轮播
-        this.width = this.container.width() || imgEle.width();
-        this.height = this.container.height() || imgEle.height();
+        // 为了规避在css中或者html中直接进行设置带来的麻烦
+        // 此处提供自定义容器宽高设置
+        // 优先获取自定义宽高设置
+        this.width = this.containerWidth || this.container.width() || imgEle.width();
+        this.height = this.containerHeight || this.container.height() || imgEle.height();
 
         // 获取图片个数
         this.itemsLen = this.container.find('.' + this.switchItemName).length;
@@ -361,6 +366,8 @@
         'nextBtnName': 'switch-next',
         'effect': 'moveEffect', // fadeEffect or moveEffect
         'moveDirection': 'left', //left or top
+        'containerWidth': 0,
+        'containerHeight': 0,
         'isHoverPause': true,
         'isPlayNumber': true,
         'isDirbtn': true,
