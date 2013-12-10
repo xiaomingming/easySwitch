@@ -60,8 +60,8 @@
         // 为了规避在css中或者html中直接进行设置带来的麻烦
         // 此处提供自定义容器宽高设置
         // 优先获取自定义宽高设置
-        this.width = this.containerWidth || this.container.width() || imgEle.width();
-        this.height = this.containerHeight || this.container.height() || imgEle.height();
+        this.width = this.containerWidth || imgEle.width();
+        this.height = this.containerHeight || imgEle.height();
 
         // 获取图片个数
         this.itemsLen = this.container.find('.' + this.switchItemName).length;

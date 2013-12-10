@@ -72,7 +72,21 @@ $(window).load(function(){
     });
 });
 ```
-若知道了图片大小，则可以直接使用jquery domReady初始化。
+若知道了图片大小，则可以直接使用jquery domReady初始化。推荐初始设定图片宽高。
+```javascript
+$(function(){
+    $('.switch-list').easySwitch({
+        'containerWidth':600,//自定义宽高，可以在domReady时进行调用，不必等待图片载入完毕
+        'containerHeight':375
+    });
+});
+```
+否则，请使用jquery window load事件进行回调。
+```javascript
+$(window).load(function(){
+    $('.switch-list').easySwitch();
+});
+```
 ##浏览器兼容性
 
 IE6+,FF,chrome等高级浏览器。
