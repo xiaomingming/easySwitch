@@ -146,6 +146,9 @@
             }
         },
         // 创建分页
+        // 分页可能会是小图模式
+        // 此处需要对外公开提供自定义小图方法
+        // 若是自定义，则传入小图链接的数组 ['images/mini1.jpg','images/mini2.jpg','images/mini3.jpg']
         createPlayNumber: function() {
             var i = 0,
                 j = this.itemsLen,

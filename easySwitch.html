@@ -46,10 +46,15 @@
                     'effectDuration': 1000
                 });
             });*/
+            // 需求增加，可以轮播那种点击小图切换到大图的模式
+            // 就是把分页数字改成小图
+            // 所以，API接口应当提供轮播数字模板的更改
             $(function(){
                 $('.switch-list').easySwitch({
                     'effect': 'moveEffect', // fadeEffect or moveEffect
                     'moveDirection': 'top', //left or top 
+                    'containerWidth':600,
+                    'containerHeight':375,
                     'isHoverPause': true,
                     'isPlayNumber': true,
                     'isDirbtn': true,
