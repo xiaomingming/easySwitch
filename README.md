@@ -30,26 +30,6 @@
 ```
 结构不能改变，但是类名可以通过js自行定义，更改了类名，也得更改css哦，这是常识。
 
-另外，非图片轮播，只需将li.switch-item的内容进行变动即可。
-###css:
-```css
-/*样式请自行美化处理*/
-/*对于类名，若有冲突，自行更改css和js，配置js类名后，再更改css类名即可*/
-.switch-wrapper { position: relative; border: 2px solid orange; font-size: 12px; }
-.switch-wrapper * { margin: 0; padding: 0; }
-.switch-list { position: relative; overflow: hidden; margin: 0; padding: 0; }
-.switch-list * { margin: 0; padding: 0; }
-/*注意此处的z-index设置*/
-.switch-list .switch-item { display: none; position: absolute; left: 0; top: 0;  z-index: 0;  text-align: center;  font-size: 16px; background: #333; color: #fff;  }
-.switch-list a img { border: 0; }
-.switch-list li.prev { display: block; z-index: 1; }
-.switch-list li.current { display: block; z-index: 2; }
-.switch-number { position: absolute; right: 10px; bottom: 20px; z-index: 12; }
-.switch-number a { float: left; margin-right: 10px; padding: 0 6px; line-height: 22px; border: 1px solid orange; background: #333; color: #fff; text-decoration: none; }
-.switch-number a.current { background: #fff; color: #333; }
-.switch-prev,.switch-next { position: absolute; width: 40px; height: 22px; text-align: center; line-height: 22px; border: 1px solid orange; background: #333; color: #fff;  top:50%; margin-top: -11px; z-index: 3; text-decoration: none; }
-.switch-prev { left: 0;  }
-.switch-next { right: 0; }
 ```
 ###js调用：
 ```javascript
