@@ -30,7 +30,6 @@
 ```
 结构不能改变，但是类名可以通过js自行定义，更改了类名，也得更改css哦，这是常识。
 
-```
 ###js调用：
 ```javascript
 $(window).load(function(){
