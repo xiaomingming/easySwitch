@@ -1,29 +1,6 @@
 /*
 * author:leweiming
 * gmail:xmlovecss 艾特 gmail dot com
-* 一个简单的轮播
-* 轮播的图片宽度应当一致
-* 轮播特效分为 移动，fadeIn/fadeOut两种
-* 移动又分为left,top两种方式
-* 支持配置上一张，下一张按钮
-* 支持配置轮播分页
-* 支持悬浮图片停止/继续 轮播
-* 支持自适应
-* 支持最外层类名配置，分页类名配置，上一张，下一张按钮类名配置
-* 对于上一张，下一张按钮的文字配置，考虑到实际，还是写死算了，你们会用图片的
-* example:
-*　$(window).load(function(){
-    $('.switch-list').easySwitch({
-        'effect': 'fadeEffect', // fadeEffect or moveEffect
-        'moveDirection': 'left', //left or top 
-        'isHoverPause': true,
-        'isPlayNumber': true,
-        'isDirbtn': true,
-        'startIndex': 0,
-        'intervalTime': 3000,
-        'effectDuration': 800
-    });
-*　});
 */
 
 ;
@@ -60,8 +37,8 @@
         // 为了规避在css中或者html中直接进行设置带来的麻烦
         // 此处提供自定义容器宽高设置
         // 优先获取自定义宽高设置
-        this.width = this.containerWidth || imgEle.width();
-        this.height = this.containerHeight || imgEle.height();
+        this.width = this.containerWidth || this.container.width() || imgEle.width();
+        this.height = this.containerHeight || this.container.height() || imgEle.height();
 
         // 获取图片个数
         this.itemsLen = this.container.find('.' + this.switchItemName).length;
@@ -146,9 +123,6 @@
             }
         },
         // 创建分页
-        // 分页可能会是小图模式
-        // 此处需要对外公开提供自定义小图方法
-        // 若是自定义，则传入小图链接的数组 ['images/mini1.jpg','images/mini2.jpg','images/mini3.jpg']
         createPlayNumber: function() {
             var i = 0,
                 j = this.itemsLen,
