@@ -160,12 +160,10 @@
         },
         // play number
         playNumber: function(index) {
-            var self = this;
             this.container.parent().find('.' + this.switchNumberName).find('a').eq(index).addClass('current').siblings().removeClass('current');
         },
         gotoIndex: function(index, prevIndex, directionFlag) {
             // 停止轮播
-            var self = this;
             this.stopSwitch();
 
             // self.startIndex = index;
@@ -299,11 +297,11 @@
         // 触发自动滚动
         autoSwitch: function() {
             var self = this,
-                perveIndex;
+                prevIndex;
             this.timer = setInterval(function() {
-                pervIndex = self.startIndex;
+                prevIndex = self.startIndex;
                 self.startIndex = self.getNext(self.startIndex);
-                self.scroll(self.startIndex, pervIndex, 1);
+                self.scroll(self.startIndex, prevIndex, 1);
             }, self.intervalTime);
         },
         // 阻止滚动
