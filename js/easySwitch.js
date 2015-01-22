@@ -1,9 +1,8 @@
 /*
-* author:leweiming
-* gmail:xmlovecss 艾特 gmail dot com
-*/
+ * author:leweiming
+ * gmail:xmlovecss 艾特 gmail dot com
+ */
 
-;
 (function(window, $, undefined) {
     var my = {},
         constructorFunName = 'Eswitch',
@@ -14,18 +13,12 @@
             imgEle;
         this.container = container;
         var settings = $.extend({}, $.fn[pluginName].defaults, options);
-        this.timer = null;
-        // 获取设置的初始滚动下标
-        this.startIndex = settings.startIndex;
-        // 类名获取
-        this.switchWrapperName = settings.switchWrapperName;
-        this.switchItemName = settings.switchItemName;
-        this.switchNumberName = settings.switchNumberName;
-        this.prevBtnName = settings.prevBtnName;
-        this.nextBtnName = settings.nextBtnName;
-        // 自定义宽高获取
-        this.containerHeight = settings.containerHeight;
-        this.containerWidth = settings.containerWidth;
+
+        for (var props in settings) {
+            if (settings.hasOwnProperty(props)) {
+                this[props] = settings[props];
+            }
+        }
         // 获取图片宽高
         imgEle = container.find('.' + this.switchItemName + ' img').eq(this.startIndex);
         // 显示才能获取宽高
@@ -45,21 +38,7 @@
         // 全局timer，动画状态判断
         this.timer = null;
         this.isAnimating = false;
-        // 获取延迟
-        this.intervalTime = settings.intervalTime;
-        // 获取动画effectDuration
-        this.effectDuration = settings.effectDuration;
-        // 是否创建播放数字
-        this.isPlayNumber = settings.isPlayNumber;
-        // 是否创建前进后退按钮
-        this.isDirbtn = settings.isDirbtn;
-        // 是否悬浮停止播放
-        this.isHoverPause = settings.isHoverPause;
-        // 特效支持
-        // 包括移动展示，fadeIn fadeOut
-        this.effect = settings.effect;
-        // 移动方向
-        this.moveDirection = settings.moveDirection;
+
         // 移动的宽度或者高度
         this.moveLenConfig = {
             'left': self.width,
