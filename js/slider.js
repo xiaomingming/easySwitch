@@ -23,6 +23,10 @@
         this.box = this.container.find(this.domSelector.box);
         this.prevBtn = this.container.find(this.domSelector.prevBtn);
         this.nextBtn = this.container.find(this.domSelector.nextBtn);
+
+        // 若存在宽度设置，使用该宽度
+        // 否则，请设置每次挪动的个数
+        this.width = this.width || (this.itemWidth + this.gutter) * this.moveItems - this.gutter;
         // 全局动画标志
         this.isAnimating = false;
         // 初始化
@@ -74,22 +78,37 @@
         getAllItems: function() {
             return this.container.find(this.domSelector.item).length;
         },
-        // 向前需要挪动的个数
-        prevItems: function() {
-            var rest = (this.getOffset() + this.gutter) / (this.itemWidth + this.gutter);
-            return rest > this.maxItems() ? this.maxItems() : 'start';
-        },
         // 一屏最多容纳的个数
         maxItems: function() {
             return (this.width + this.gutter) / (this.itemWidth + this.gutter);
         },
+        // 向前需要挪动的个数
+        prevItems: function() {
+            var restItems = (this.getOffset() + this.gutter) / (this.itemWidth + this.gutter);
+
+            restItems = restItems > this.maxItems() ? this.maxItems() : 'start';
+
+            if (this.moveItems !== 'max' && restItems !== 'start') {
+                return this.moveItems;
+            } else {
+                return restItems;
+            }
+        },
+
         // 下一次需要挪动的个数
         nextItems: function() {
             var restItems = this.getAllItems() - (this.getOffset() + this.gutter) / (this.itemWidth + this.gutter) - this.maxItems();
             if (restItems <= 0) {
                 return 0;
             }
-            return restItems > this.maxItems() ? this.maxItems() : 'end';
+
+            restItems = (restItems > this.maxItems()) ? this.maxItems() : 'end';
+
+            if (this.moveItems !== 'max' && restItems !== 'end') {
+                return this.moveItems;
+            } else {
+                return restItems;
+            }
         },
         // 挪动的距离
         moveUnits: function(items) {
@@ -161,8 +180,10 @@
             prevBtn: '.move .prev', // 前一个
             nextBtn: '.move .next' // 下一个
         },
+        // 注意，一次移动指定个数时，一屏包含的个数应当是整数，而不是半个
+        moveItems: 'max', //默认每次挪动单屏里容纳的最大个数
         duration: 400, //动画持续时间
-        width: 960, // 一屏展示的容器总宽度
+        // width: 960, // 一屏展示的容器总宽度
         height: 300, // 一屏展示的总高度
         itemWidth: 200, // 单个展示图的宽度
         gutter: 10 // 展示图的右间距
