@@ -108,23 +108,19 @@
                     to = (this.itemWidth + this.gutter) * this.getAllItems() - this.gutter - this.width;
                 } else {
                     to = this.getOffset() + this.moveUnits(this.nextItems());
-
                 }
-
             } else if (direction === 'right') {
                 if (isNaN(this.prevItems())) {
                     to = 0;
                 } else {
                     to = this.getOffset() - this.moveUnits(this.prevItems());
                 }
-
             }
             if (!this.isAnimating) {
                 this.isAnimating = true;
                 $.when(this.animate(to)).then(function() {
                     _this.isAnimating = false;
                 });
-
             }
             return this;
         },
@@ -150,23 +146,22 @@
             if (!that.data('plugin-' + pluginName)) {
                 return that.data('plugin-' + pluginName, s1);
             }
-
         });
 
     };
     // 默认参数配置
     $.fn[pluginName].defaults = {
+        // dom配置，若样式定义存在冲突，可以更改此处dom和样式即可
         domSelector: {
-            wrapper: '.slider',
-            box: '.slider-box',
-            item: '.slider-item',
-            body: '.inner',
-            move: '.move',
-            prevBtn: '.move .prev',
-            nextBtn: '.move .next'
+            wrapper: '.slider', // slider最外层
+            box: '.slider-box', // slider 列表
+            item: '.slider-item', // slider 列表项
+            body: '.inner', // slider内层
+            move: '.move', // 前后左右包裹层
+            prevBtn: '.move .prev', // 前一个
+            nextBtn: '.move .next' // 下一个
         },
         duration: 400, //动画持续时间
-        delay: 0, //动画延迟时间
         width: 960, // 一屏展示的容器总宽度
         height: 300, // 一屏展示的总高度
         itemWidth: 200, // 单个展示图的宽度
