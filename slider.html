@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>测试</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .slider {
+        text-align: center;
+    }
+    .slider .inner {
+        position: relative;
+        width: 960px;
+        height: 300px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .slider .slider-box {
+        position: absolute;
+        left: 0;
+        top: 0;
+        list-style: none;
+        width: 9999em;
+    }
+    .slider .slider-item {
+        float: left;
+        margin-right: 10px;
+    }
+    .slider img {
+        width: 200px;
+        height: 300px;
+    }
+    .slider .move .prev,
+    .slider .move .next {
+        position: absolute;
+        top: 50%;
+        width: 40px;
+        height: 24px;
+        margin: -12px 0 0 0;
+        line-height: 24px;
+        text-align: center;
+        padding: 0 6px;
+        font-size: 14px;
+        color: #fff;
+        background: orange;
+    }
+    .slider .move .prev {
+        left: 0;
+    }
+    .slider .move .next {
+        right: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="slider-lists" class="slider">
+        <div class="inner">
+            <ul class="slider-box">
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s1.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s2.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s3.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s4.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s5.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s6.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s7.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s9.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s10.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s11.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s1.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s2.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s3.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s4.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s5.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s6.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s7.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s9.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s10.jpg" alt="s1">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="images/s11.jpg" alt="s1">
+                    </a>
+                </li>
+            </ul>
+            <div class="move">
+                <a href="#" class="prev">prev</a>
+                <a href="#" class="next">next</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.8.2.js"></script> 
+    <script type="text/javascript" src="js/slider.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('#slider-lists').slider({});
+    });
+    </script>
+</body>
+
+</html>
