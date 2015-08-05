@@ -1,0 +1,85 @@
+@charset "utf-8";
+
+@import "../../../css/common/scss/base";
+
+.m-slider {
+    margin: 0;
+    padding: 0;
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    position: relative;
+    .inner {
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .slider-box {
+        position: absolute;
+        left: 0;
+        top: 0;
+        list-style: none;
+        width: 9999em;
+        overflow: hidden;
+    }
+    .slider-info-box {
+        position: relative;
+        overflow: hidden;
+    }
+    .slider-item {
+        position: relative;
+        float: left;
+        margin-right: 20px;
+        > a {
+            display: block;
+            overflow: hidden;
+            @extend %lazy-bg;
+        }
+    }
+    .move .prev, .move .next {
+        display: none;
+        position: absolute;
+        top: 50%;
+        width: 90px;
+        top: 0;
+        bottom: 0;
+        background-image: url("images/m-slider-filter.png");
+        background-repeat: no-repeat;
+        z-index: 3;
+        overflow: hidden;
+        @extend %text-hide;
+        &:before {
+            position: absolute;
+            content: '';
+            width: 45px;
+            height: 45px;
+            top: 50%;
+            margin-top: -23px;
+            background-image: url("images/m-slider-btn.png");
+            background-repeat: no-repeat;
+        }
+    }
+    .move .prev {
+        left: 0;
+        background-position: 0 0;
+        &:hover {
+            background-position: 0 0;
+        }
+        &:before {
+            left: 0;
+            background-position: 0 0;
+        }
+    }
+    .move .next {
+        right: 0;
+        background-position: -90px 0;
+        &:hover {
+            background-position: -90px 0;
+        }
+        &:before {
+            right: 0;
+            background-position: -145px 0;
+        }
+    }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>测试</title>
+    <link rel="stylesheet" href="js/utils/slider/easySwitch.css">
+</head>
+
+<body>
+    <ul class="switch-list">
+        <li class="switch-item">
+            <a href="#" title="1">
+                <img src="images/slider/1.jpg" alt="">
+            </a>
+        </li>
+        <li class="switch-item">
+            <a href="#" title="2">
+                <img src="images/slider/2.jpg" alt="">
+            </a>
+        </li>
+        <li class="switch-item">
+            <a href="#" title="3">
+                <img src="images/slider/3.jpg" alt="">
+            </a>
+        </li>
+        <li class="switch-item">
+            <a href="#" title="4">
+                <img src="images/slider/4.jpg" alt="">
+            </a>
+        </li>
+        <li class="switch-item">
+            <a href="#" title="5">
+                <img src="images/slider/5.jpg" alt="">
+            </a>
+        </li>
+    </ul>
+    <script type="text/javascript" src="js/libs/require.js"></script>
+    <script type="text/javascript" src="js/requirejs-config.js"></script>
+    <script type="text/javascript">
+    require(['jquery', 'easySwitch'], function($, easySwitch) {
+        $(function() {
+            $('.switch-list').easySwitch({
+                effect: 'moveEffect', // fadeEffect or moveEffect
+                moveDirection: 'left', //left or top 
+                containerWidth: 600,
+                containerHeight: 375,
+                isHoverPause: true,
+                isPlayNumber: true,
+                isDirbtn: true,
+                startIndex: 0,
+                intervalTime: 114000,
+                effectDuration: 800
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>

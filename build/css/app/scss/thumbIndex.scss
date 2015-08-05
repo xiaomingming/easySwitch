@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+@import "../../../js/utils/slider/easySwitch";
+
+.thumb-horizen {
+    .switch-list {
+        background-color: #fff;
+    }
+    .switch-item-info {
+        position: absolute;
+        left: 0;
+        bottom: 20px;
+        width: 360px;
+        height: 60px;
+        text-align: left;
+    }
+    .switch-thumb {
+        bottom: 20px;
+        right: 0;
+    }
+    .switch-prev, .switch-next {
+        margin-top: -71px;
+    }
+}
+
+.thumb-vertical {
+    position: relative;
+    width: 900px;
+    height: 290px;
+    margin: 40px auto 10px auto;
+    .switch-wrapper {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .switch-list {
+        background-color: #fff;
+    }
+    .switch-prev, .switch-next {
+        display: none;
+    }
+    .switch-thumb {
+        left: -116px;
+        top: 0;
+    }
+}
