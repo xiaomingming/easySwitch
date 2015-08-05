@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+@import "settings";
+
+// 懒加载背景图
+%lazy-bg {
+    display: block;
+    background: #efefef url("js/utils/slider/images/loading.gif") center center no-repeat;
+}
+
+// clearfix
+%clearfix {
+    &:before, &:after {
+        content: '';
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// 文本溢出
+%ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// 文本折行切断
+%word-break {
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+%text-hide {
+    display: block;
+    text-indent: -9999em;
+    overflow: hidden;
+}

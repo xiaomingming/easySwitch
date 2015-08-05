@@ -1,0 +1,149 @@
+@charset "utf-8";
+
+@import "../../../css/common/scss/base";
+
+.switch-wrapper {
+    position: relative;
+    font-size: 12px;
+    margin: 0 auto;
+}
+
+.switch-wrapper *, .switch-list * {
+    margin: 0;
+    padding: 0;
+}
+
+.switch-list {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    .switch-item {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+    }
+    a {
+        display: block;
+        // height: 100%;
+        img {
+            border: 0;
+        }
+    }
+    li {
+        &.prev {
+            display: block;
+            z-index: 1;
+        }
+        &.current {
+            display: block;
+            z-index: 2;
+        }
+    }
+}
+
+// 轮播数字
+.switch-number {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+    z-index: 12;
+    a {
+        float: left;
+        margin-right: 6px;
+        padding: 0 6px;
+        line-height: 22px;
+        color: #fff;
+        text-decoration: none;
+        &.current {
+            background: #fff;
+            color: #333;
+        }
+    }
+}
+
+// 缩略图
+.switch-thumb {
+    position: absolute;
+    overflow: hidden;
+    z-index: 12;
+    background-color: #fff;
+    .thumb-inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        a.current {
+            border-radius: 6px;
+        }
+    }
+    &.switch-thumb-horizen .thumb-inner {
+        width: 9999em;
+        a {
+            float: left;
+            margin-right: 10px;
+        }
+    }
+    &.switch-thumb-vertical .thumb-inner {
+        height: 9999em;
+        a {
+            margin-bottom: 10px;
+        }
+    }
+    a {
+        position: relative;
+        display: block;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+}
+
+.switch-prev,
+.switch-next {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    top: 50%;
+    margin-top: -20px;
+    z-index: 3;
+    text-decoration: none;
+    transition: all 0.3s ease-in;
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+.switch-prev, .switch-next {
+    background-image: url("images/slider-btns.png");
+    background-repeat: no-repeat;
+    @extend %text-hide;
+    border-radius: 100%;
+}
+
+.switch-prev {
+    background-position: -3px -3px;
+}
+
+.switch-next {
+    background-position: -1px -59px;
+}
+
+.switch-prev {
+    left: 10px;
+}
+
+.switch-next {
+    right: 10px;
+}

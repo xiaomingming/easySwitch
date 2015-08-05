@@ -1,9 +1,8 @@
 /*
  * author:leweiming
- * gmail:xmlovecss 艾特 gmail dot com
+ * date: 2015/8/5
  */
-
-(function(window, $, undefined) {
+define(['jquery', 'lazyload'], function($, lazyload) {
     var my = {},
         constructorFunName = 'Eswitch',
         pluginName = 'easySwitch';
@@ -24,12 +23,6 @@
         // 显示才能获取宽高
         imgEle.parents('.' + this.switchItemName).addClass('prev');
 
-        // 如果不是图像，则可以获取包含框的高度
-        // 这样适合非图片的轮播
-        // 也适合switch-item内部嵌套其他层，从而对switch-item进行轮播
-        // 为了规避在css中或者html中直接进行设置带来的麻烦
-        // 此处提供自定义容器宽高设置
-        // 优先获取自定义宽高设置
         this.width = this.containerWidth || this.container.width() || imgEle.width();
         this.height = this.containerHeight || this.container.height() || imgEle.height();
 
@@ -70,9 +63,11 @@
         // 滚动初始化
         init: function() {
             var self = this;
+            // this.setImgUrl();
             this.setContainerStyle();
             // this.container.find('li').eq(this.startIndex).addClass('prev');
             this.isPlayNumber && this.renderPlayNumber();
+            this.isPlayThumb && this.renderThumb();
             this.isDirbtn && this.renderDirectionBtn();
             // 自动播放
             this.autoSwitch();
@@ -101,6 +96,38 @@
                 return false;
             }
         },
+        // 创建缩略图
+        createThumb: function() {
+            var i = 0,
+                j = this.itemsLen,
+                thumbContainerWidth, //缩略图容器宽度
+                thumbContainerHeight, //缩略图容器高度
+                directionClass, //方向类别，用于样式控制
+                $sliderItem,
+                tmp;
+
+            if (this.thumbDirection === 'horizen') {
+                thumbContainerWidth = (this.thumbWidth + this.thumbGutter) * this.thumbItems - this.thumbGutter;
+                thumbContainerHeight = this.thumbHeight;
+                directionClass = 'switch-thumb-horizen';
+            } else if (this.thumbDirection === 'vertical') {
+                thumbContainerWidth = this.thumbWidth;
+                thumbContainerHeight = (this.thumbHeight + this.thumbGutter) * this.thumbItems - this.thumbGutter;
+                directionClass = 'switch-thumb-vertical';
+            }
+            tmp = '<div class="' + this.thumbName + ' ' + directionClass + '" style="width:' + thumbContainerWidth + 'px;height:' + thumbContainerHeight + 'px;"><div class="thumb-inner">';
+            $sliderItem = this.container.find('.' + this.switchItemName);
+            for (; i < j; i++) {
+                if (i === this.startIndex) {
+                    tmp += '<a href="#" class="current" style="width:' + this.thumbWidth + 'px;height:' + this.thumbHeight + 'px;background-image:' + $sliderItem.eq(i).data('thumb') + ';"></a>';
+                } else {
+                    tmp += '<a href="#" style="width:' + this.thumbWidth + 'px;height:' + this.thumbHeight + 'px;background-image:' + $sliderItem.eq(i).data('thumb') + ';"></a>';
+                }
+            }
+            tmp += '</div></div>';
+
+            return tmp;
+        },
         // 创建分页
         createPlayNumber: function() {
             var i = 0,
@@ -120,13 +147,83 @@
         renderPlayNumber: function() {
             var switchWrapper = this.createSwitchWrapper(),
                 self = this;
-            // this.playNumber = self.createPlayNumber();
             if (switchWrapper) {
                 this.container.wrap(switchWrapper);
             }
             this.container.parent().append(self.createPlayNumber());
             this.playNumberEvent();
+        },
+        renderThumb: function() {
+            var switchWrapper = this.createSwitchWrapper(),
+                self = this;
+            if (switchWrapper) {
+                this.container.wrap(switchWrapper);
+            }
+            this.container.parent().append(self.createThumb());
+            this.playThumbEvent();
+        },
+        // 挪动缩略图
+        moveThumb: function(index) {
+            var moveUnit, realMove, moveStartIndex, moveMax, $thumbContainer = this.container.parent().find('.thumb-inner');
+            var _this = this;
+            // 若设置的缩略图个数大于最大长度
+            if (this.thumbItems >= this.itemsLen) {
+                this.thumbItems = this.itemsLen;
+                return;
+            }
 
+            moveStartIndex = Math.ceil(this.thumbItems / 2); //挪动缩略图的开始下标
+            moveUnit = Math.floor((this.thumbItems - 1) / 2); //每屏挪动的个数
+            realMove = moveUnit * (Math.ceil(index / moveUnit - 1)); //当前下标，缩略图要挪动的个数
+            moveMax = this.itemsLen - this.thumbItems; //最大的挪动个数
+
+            if (this.thumbDirection === 'horizen') {
+                if (index < moveStartIndex) {
+                    $thumbContainer.animate({
+                        'left': '0'
+                    }, this.effectDuration);
+                    return;
+                }
+
+                if (realMove < moveMax) {
+                    // 若尚未挪动到末屏
+                    $thumbContainer.animate({
+                        'left': -realMove * (_this.thumbWidth + _this.thumbGutter) + 'px'
+                    }, this.effectDuration);
+                } else {
+                    $thumbContainer.animate({
+                        'left': -moveMax * (_this.thumbWidth + _this.thumbGutter) + 'px'
+                    }, this.effectDuration);
+                }
+            } else if (this.thumbDirection === 'vertical') {
+                if (index < moveStartIndex) {
+                    $thumbContainer.animate({
+                        'top': '0'
+                    }, this.effectDuration);
+                    return;
+                }
+
+                if (realMove < moveMax) {
+                    // 若尚未挪动到末屏
+                    $thumbContainer.animate({
+                        'top': -realMove * (_this.thumbHeight + _this.thumbGutter) + 'px'
+                    }, this.effectDuration);
+                } else {
+                    $thumbContainer.animate({
+                        'top': -moveMax * (_this.thumbHeight + _this.thumbGutter) + 'px'
+                    }, this.effectDuration);
+                }
+            }
+        },
+        // 绑定缩略图播放
+        playThumbEvent: function() {
+            var self = this;
+
+            this.container.parent().find('.' + this.thumbName).on('click', 'a', function(e) {
+                e.preventDefault();
+                self.gotoIndex($(this).index(), self.startIndex, '');
+                self.moveThumb($(this).index());
+            });
         },
         // 绑定数字播放事件
         playNumberEvent: function() {
@@ -137,6 +234,11 @@
                 self.gotoIndex($(this).index(), self.startIndex, '');
             });
         },
+        // play thumb
+        playThumb: function(index) {
+            this.container.parent().find('.' + this.thumbName).find('a').eq(index).addClass('current').siblings().removeClass('current');
+            this.moveThumb(index);
+        },
         // play number
         playNumber: function(index) {
             this.container.parent().find('.' + this.switchNumberName).find('a').eq(index).addClass('current').siblings().removeClass('current');
@@ -145,8 +247,6 @@
             // 停止轮播
             this.stopSwitch();
 
-            // self.startIndex = index;
-            // 
             this.scroll(index, prevIndex, directionFlag);
             this.autoSwitch();
         },
@@ -229,8 +329,11 @@
             if (this.isAnimating) {
                 return;
             }
-
+            if (index === prevIndex) {
+                return;
+            }
             this.isAnimating = true;
+
             // 更改开始的下标
             // 这句相当关键，动画状态正在运动时，就不能让startIndex更改了，而放置的最佳位置，就是这里
             this.startIndex = index;
@@ -268,9 +371,12 @@
             }
             // 效果这里控制，本来使用key/value来进行控制，这样代码显得优雅
             // 但是，在$.when()中，作为参数，产生了问题，于是这里代码就先ugly着
+            self.isPlayThumb && self.playThumb(index);
+            self.isPlayNumber && self.playNumber(index);
             $.when(promiseCurrent, promisePrev).done(function() {
+                self.lazyloadImg();
                 self.isAnimating = false;
-                self.isPlayNumber && self.playNumber(index);
+
             });
         },
         // 触发自动滚动
@@ -290,6 +396,9 @@
                 clearInterval(self.timer);
                 self.timer = null;
             }
+        },
+        lazyloadImg: function() {
+            this.container.find('img').lazyload();
         }
     };
     $.fn[pluginName] = function(opts) {
@@ -313,20 +422,29 @@
 
     };
     $.fn[pluginName].defaults = {
-        'switchWrapperName': 'switch-wrapper',
-        'switchItemName': 'switch-item',
-        'switchNumberName': 'switch-number',
-        'prevBtnName': 'switch-prev',
-        'nextBtnName': 'switch-next',
-        'effect': 'moveEffect', // fadeEffect or moveEffect
-        'moveDirection': 'left', //left or top
-        'containerWidth': 0,
-        'containerHeight': 0,
-        'isHoverPause': true,
-        'isPlayNumber': true,
-        'isDirbtn': true,
-        'startIndex': 0,
-        'intervalTime': 3000,
-        'effectDuration': 800
+        switchWrapperName: 'switch-wrapper',
+        switchItemName: 'switch-item',
+        switchNumberName: 'switch-number',
+        thumbName: 'switch-thumb',
+        prevBtnName: 'switch-prev',
+        nextBtnName: 'switch-next',
+        effect: 'moveEffect', // fadeEffect or moveEffect
+        moveDirection: 'left', //left or top
+        containerWidth: 0,
+        containerHeight: 0,
+        isHoverPause: true,//是否悬浮暂停轮播
+        isPlayNumber: true,//是否显示轮播序号
+        isPlayThumb: false,//是否显示轮播缩略图
+        isDirbtn: true,//是否显示前进后退
+        startIndex: 0,//轮播开始的下标
+        intervalTime: 3000,
+        effectDuration: 500,
+        thumbWidth: 200,//缩略图宽度
+        thumbHeight: 70,//缩略图高度
+        thumbGutter: 10,//缩略图间距
+        thumbItems: 2,//缩略图个数
+        thumbDirection: 'horizen' //缩略图方向，水平或者居中vertical
     };
-})(window, jQuery);
+
+    return constructorFunName;
+});
