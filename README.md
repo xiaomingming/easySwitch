@@ -1,5 +1,4 @@
-#EasySwitch
-#基于`jquery`的简单的图片轮播插件
+##基于`jquery`的简单的图片轮播插件
 
 分为`easySwitch.js`和`slider.js`
 `easySwitch.js`带缩略图功能，以及普通轮播功能，支持渐变和移动两种效果。
@@ -47,6 +46,11 @@ isDirbtn: true, // 是否显示轮播的 上一个 下一个按钮
 startIndex: 0, // 轮播从第几张图片开始
 intervalTime: 3000, // 图片轮播间隔时间
 effectDuration: 800 // 动画效果持续时间
+thumbWidth: 200,//缩略图宽度
+thumbHeight: 70,//缩略图高度
+thumbGutter: 10,//缩略图间距
+thumbItems: 2,//缩略图个数
+thumbDirection: 'horizen' //缩略图方向，水平或者居中vertical
 ```
 若知道了图片大小，则可以直接使用jquery domReady初始化。推荐初始设定图片宽高。
 ```javascript
