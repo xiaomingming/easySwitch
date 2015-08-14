@@ -104,7 +104,7 @@ define(['jquery', 'lazyload'], function($, lazyload) {
                 thumbContainerHeight, //缩略图容器高度
                 directionClass, //方向类别，用于样式控制
                 $sliderItem,
-                tmp;
+                tmp,activeClass;
 
             if (this.thumbDirection === 'horizen') {
                 thumbContainerWidth = (this.thumbWidth + this.thumbGutter) * this.thumbItems - this.thumbGutter;
@@ -118,11 +118,8 @@ define(['jquery', 'lazyload'], function($, lazyload) {
             tmp = '<div class="' + this.thumbName + ' ' + directionClass + '" style="width:' + thumbContainerWidth + 'px;height:' + thumbContainerHeight + 'px;"><div class="thumb-inner">';
             $sliderItem = this.container.find('.' + this.switchItemName);
             for (; i < j; i++) {
-                if (i === this.startIndex) {
-                    tmp += '<a href="#" class="current" style="width:' + this.thumbWidth + 'px;height:' + this.thumbHeight + 'px;background-image:' + $sliderItem.eq(i).data('thumb') + ';"></a>';
-                } else {
-                    tmp += '<a href="#" style="width:' + this.thumbWidth + 'px;height:' + this.thumbHeight + 'px;background-image:' + $sliderItem.eq(i).data('thumb') + ';"></a>';
-                }
+                activeClass = (i === this.startIndex) ? ' current' : '';
+                tmp += '<span class="thumb-nav-item' + activeClass + '" style="width:' + this.thumbWidth + 'px;height:' + this.thumbHeight + 'px;background-image:' + $sliderItem.eq(i).data('thumb') + ';"></span>';
             }
             tmp += '</div></div>';
 
@@ -326,10 +323,10 @@ define(['jquery', 'lazyload'], function($, lazyload) {
         },
         // 滚动回调
         scroll: function(index, prevIndex, directionFlag) {
-            if (this.isAnimating) {
+            if (index === prevIndex) {
                 return;
             }
-            if (index === prevIndex) {
+            if (this.isAnimating) {
                 return;
             }
             this.isAnimating = true;
@@ -432,17 +429,17 @@ define(['jquery', 'lazyload'], function($, lazyload) {
         moveDirection: 'left', //left or top
         containerWidth: 0,
         containerHeight: 0,
-        isHoverPause: true,//是否悬浮暂停轮播
-        isPlayNumber: true,//是否显示轮播序号
-        isPlayThumb: false,//是否显示轮播缩略图
-        isDirbtn: true,//是否显示前进后退
-        startIndex: 0,//轮播开始的下标
+        isHoverPause: true, //是否悬浮暂停轮播
+        isPlayNumber: true, //是否显示轮播序号
+        isPlayThumb: false, //是否显示轮播缩略图
+        isDirbtn: true, //是否显示前进后退
+        startIndex: 0, //轮播开始的下标
         intervalTime: 3000,
         effectDuration: 500,
-        thumbWidth: 200,//缩略图宽度
-        thumbHeight: 70,//缩略图高度
-        thumbGutter: 10,//缩略图间距
-        thumbItems: 2,//缩略图个数
+        thumbWidth: 200, //缩略图宽度
+        thumbHeight: 70, //缩略图高度
+        thumbGutter: 10, //缩略图间距
+        thumbItems: 2, //缩略图个数
         thumbDirection: 'horizen' //缩略图方向，水平或者居中vertical
     };
 
