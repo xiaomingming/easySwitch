@@ -1,10 +1,10 @@
-##基于jquery的简单的图片轮播插件
+## 基于jquery的简单的图片轮播插件
 
 分为`easySwitch.js`和`slider.js`
 `easySwitch.js`带缩略图功能，以及普通轮播功能，支持渐变和移动两种效果。
 `slider.js`是简单的一屏多图轮播（暂不介绍，可以直接看demo）。
 
-##easySwitch实现原理：
+## easySwitch实现原理：
 假设方向为水平方向，那么从第一张滑动到第二张。第二张图片要往左滑动的同时，第一张图片也要往左滑动（也有另一种滑动效果，第一张图片是不动的，第二张图片直接覆盖上去）。
 
 这样的话，我们需要计算好轮播的当前下标`index`和当前状态的前一个图片的下标`index`。使用绝对定位，同时显示两者，并准备好当前图片的位置。
@@ -15,8 +15,8 @@
 
 对于动画状态的判断需要格外注意了。这里设置了全局动画标识，所有的事件逻辑最终要走向`scroll`函数，那么，当动画还在进行时，点击事件是不能生效的。
 
-##easySwitch使用方法：
-###html结构：
+## easySwitch使用方法：
+### html结构：
 ```html
 <ul class="switch-list">
     <li class="switch-item"><a href="#" title="1"><img src="images/1.jpg" alt=""></a></li>
@@ -28,7 +28,7 @@
 ```
 结构不能改变，但是类名可以通过js自行定义，更改了类名，也得更改css。
 
-###配置说明：
+### 配置说明：
 ```javascript
 switchWrapperName: 'switch-wrapper', // 轮播的最外包含框类名定义
 switchNumberName: 'switch-number', // 轮播数字包含框类名定义
@@ -65,7 +65,7 @@ $(window).load(function(){
     $('.switch-list').easySwitch();
 });
 ```
-##浏览器兼容性
+## 浏览器兼容性
 
 IE6+,FF,chrome等浏览器。
     
